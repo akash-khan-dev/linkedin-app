@@ -1,0 +1,40 @@
+.registration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.registration-box {
+  width: 500px;
+  height: 500px;
+}
+.linkin-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.linkin-icon svg {
+  width: 40px;
+  height: 40px;
+}
+.linkin-icon svg path {
+  fill: var(--primary-color);
+}
+.registration-heading h1 {
+  text-align: center;
+  font-family: var(--nunito);
+  font-size: 34px;
+  font-weight: 700;
+  padding-top: 10px;
+}
+.registration-heading h4 {
+  text-align: center;
+  font-family: var(--nunito);
+  font-size: 20px;
+  font-weight: 400;
+  opacity: 0.5;
+  padding-bottom: 20px;
+}
+.inputs {
+  outline-color: #11175d;
+}
