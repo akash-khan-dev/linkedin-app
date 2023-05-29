@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 // react icon
 import { BsLinkedin } from "react-icons/bs";
 import { Button, Input } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { SignUp } from "../../Validation/Validation";
-
+import { AiFillEye } from "react-icons/ai";
+import { AiOutlineEyeInvisible } from "react-icons/ai";
 const Registration = () => {
+  const [isShowPass, setIsShowPass] = useState(true);
   const initialValues = {
     fullname: "",
     email: "",
@@ -60,15 +62,29 @@ const Registration = () => {
                   formik.errors.email}
               </span>
 
-              <Input
-                onChange={formik.handleChange}
-                mt="5"
-                type="password"
-                name="password"
-                values={formik.values.password}
-                placeholder="Password"
-                size="lg"
-              />
+              <div style={{ position: "relative" }}>
+                <Input
+                  onChange={formik.handleChange}
+                  mt="5"
+                  type={isShowPass ? "password" : "text"}
+                  name="password"
+                  values={formik.values.password}
+                  placeholder="Password"
+                  size="lg"
+                />
+                <div
+                  className="Eye"
+                  onClick={() => setIsShowPass(!isShowPass ? true : false)}
+                  style={{
+                    position: "absolute",
+                    top: "35px",
+                    right: "25px",
+                    cursor: "pointer",
+                  }}
+                >
+                  {!isShowPass ? <AiOutlineEyeInvisible /> : <AiFillEye />}
+                </div>
+              </div>
 
               <span className="login-error">
                 {formik.touched.password &&
