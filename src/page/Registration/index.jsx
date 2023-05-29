@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 // react icon
 import { BsLinkedin } from "react-icons/bs";
-import { Input } from "@chakra-ui/react";
+import { Button, Input } from "@chakra-ui/react";
 
 const Registration = () => {
   return (
@@ -18,15 +18,41 @@ const Registration = () => {
           </div>
           <div className="registration-form">
             <form>
-              <Input placeholder="Full Name" size="lg" />
+              <Input
+                type="text"
+                name="fullname"
+                placeholder="Full Name"
+                size="lg"
+              />
               <Input
                 mt="5"
-                className="inputs"
+                type="text"
+                name="email"
                 placeholder="Email Address"
                 size="lg"
               />
-              <Input mt="5" placeholder="Password" size="lg" />
-              <Input mt="5" placeholder="Confirm Password" size="lg" />
+              <Input
+                mt="5"
+                type="password"
+                name="password"
+                placeholder="Password"
+                size="lg"
+              />
+              <Input
+                mt="5"
+                type="passord"
+                name="confirmpassword"
+                placeholder="Confirm Password"
+                size="lg"
+              />
+              <Button
+                className="reg-btn"
+                mt="6"
+                width="full"
+                colorScheme="blue"
+              >
+                Sign up
+              </Button>
             </form>
           </div>
         </div>

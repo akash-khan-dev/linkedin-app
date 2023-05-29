@@ -35,6 +35,9 @@
   opacity: 0.5;
   padding-bottom: 20px;
 }
-.inputs {
-  outline-color: #11175d;
+.registration-form {
+  padding: 0 30px;
+}
+.reg-btn {
+  border-radius: 86px !important;
 }
