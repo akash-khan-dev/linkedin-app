@@ -4,6 +4,7 @@ import "./style.css";
 import { BsLinkedin } from "react-icons/bs";
 import { Button, Input } from "@chakra-ui/react";
 import { useFormik } from "formik";
+import { SignUp } from "../../Validation/Validation";
 
 const Registration = () => {
   const initialValues = {
@@ -14,6 +15,7 @@ const Registration = () => {
   };
   const formik = useFormik({
     initialValues: initialValues,
+    validationSchema: SignUp,
     onSubmit: () => {
       console.log("hello");
     },
@@ -40,6 +42,9 @@ const Registration = () => {
                 placeholder="Full Name"
                 size="lg"
               />
+              <span className="login-error">
+                {formik.errors.fullname && formik.errors.fullname}
+              </span>
               <Input
                 onChange={formik.handleChange}
                 mt="5"
@@ -49,6 +54,12 @@ const Registration = () => {
                 placeholder="Email Address"
                 size="lg"
               />
+              <span className="login-error">
+                {formik.touched.email &&
+                  formik.errors.email &&
+                  formik.errors.email}
+              </span>
+
               <Input
                 onChange={formik.handleChange}
                 mt="5"
@@ -58,15 +69,28 @@ const Registration = () => {
                 placeholder="Password"
                 size="lg"
               />
+
+              <span className="login-error">
+                {formik.touched.password &&
+                  formik.errors.password &&
+                  formik.errors.password}
+              </span>
+
               <Input
                 onChange={formik.handleChange}
                 mt="5"
-                type="passord"
+                type="password"
                 name="confirmpassword"
                 value={formik.values.confirmpassword}
                 placeholder="Confirm Password"
                 size="lg"
               />
+              <span className="login-error">
+                {formik.touched.confirmpassword &&
+                  formik.errors.confirmpassword &&
+                  formik.errors.confirmpassword}
+              </span>
+
               <Button
                 type="submit"
                 className="reg-btn"

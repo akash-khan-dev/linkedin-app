@@ -42,3 +42,6 @@
 .reg-btn {
   border-radius: 86px !important;
 }
+.login-error {
+  color: #e97373;
+}
