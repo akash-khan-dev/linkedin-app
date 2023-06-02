@@ -8,7 +8,11 @@ import { SignUp } from "../../Validation/Validation";
 import { AiFillEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 // firebase
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 const Registration = () => {
   const auth = getAuth();
   const [isShowPass, setIsShowPass] = useState(true);
@@ -26,7 +30,9 @@ const Registration = () => {
         auth,
         formik.values.email,
         formik.values.password
-      );
+      ).then(() => {
+        sendEmailVerification(auth.currentUser);
+      });
     },
   });
   console.log(formik.values);
