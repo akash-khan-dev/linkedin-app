@@ -7,7 +7,10 @@ import { useFormik } from "formik";
 import { SignUp } from "../../Validation/Validation";
 import { AiFillEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
+// firebase
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 const Registration = () => {
+  const auth = getAuth();
   const [isShowPass, setIsShowPass] = useState(true);
   const initialValues = {
     fullname: "",
@@ -19,7 +22,11 @@ const Registration = () => {
     initialValues: initialValues,
     validationSchema: SignUp,
     onSubmit: () => {
-      console.log("hello");
+      createUserWithEmailAndPassword(
+        auth,
+        formik.values.email,
+        formik.values.password
+      );
     },
   });
   console.log(formik.values);
