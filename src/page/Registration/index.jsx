@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import { SignUp } from "../../Validation/Validation";
 import { AiFillEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
+import BeatLoader from "react-spinners/BeatLoader";
 // firebase
 import {
   getAuth,
@@ -16,6 +17,7 @@ import {
 const Registration = () => {
   const auth = getAuth();
   const [isShowPass, setIsShowPass] = useState(true);
+  let [loading, setLoading] = useState(false);
   const initialValues = {
     fullname: "",
     email: "",
@@ -26,12 +28,14 @@ const Registration = () => {
     initialValues: initialValues,
     validationSchema: SignUp,
     onSubmit: () => {
+      setLoading(true);
       createUserWithEmailAndPassword(
         auth,
         formik.values.email,
         formik.values.password
       ).then(() => {
         sendEmailVerification(auth.currentUser);
+        setLoading(false);
       });
     },
   });
@@ -120,15 +124,27 @@ const Registration = () => {
                   formik.errors.confirmpassword}
               </span>
 
-              <Button
-                type="submit"
-                className="reg-btn"
-                mt="6"
-                width="full"
-                colorScheme="blue"
-              >
-                Sign up
-              </Button>
+              {!loading ? (
+                <Button
+                  type="submit"
+                  className="reg-btn"
+                  mt="6"
+                  width="full"
+                  colorScheme="blue"
+                >
+                  Sign up
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  className="reg-btn"
+                  mt="6"
+                  width="full"
+                  colorScheme="blue"
+                >
+                  <BeatLoader />
+                </Button>
+              )}
             </form>
           </div>
         </div>
