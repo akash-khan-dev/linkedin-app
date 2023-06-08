@@ -8,14 +8,18 @@ import { SignUp } from "../../Validation/Validation";
 import { AiFillEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import BeatLoader from "react-spinners/BeatLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // firebase
 import {
   getAuth,
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 const Registration = () => {
   const auth = getAuth();
+  const navigate = useNavigate();
   const [isShowPass, setIsShowPass] = useState(true);
   let [loading, setLoading] = useState(false);
   const initialValues = {
@@ -33,16 +37,42 @@ const Registration = () => {
         auth,
         formik.values.email,
         formik.values.password
-      ).then(() => {
-        sendEmailVerification(auth.currentUser);
-        setLoading(false);
-      });
+      )
+        .then(() => {
+          sendEmailVerification(auth.currentUser);
+          setLoading(false);
+          navigate("/login");
+        })
+        .catch(() => {
+          console.log();
+          toast.error(`🦄 Email is use !`, {
+            position: "bottom-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+          });
+          setLoading(false);
+        });
     },
   });
   console.log(formik.values);
   return (
     <>
       <div className="registration">
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         <div className="registration-box">
           <div className="linkin-icon">
             <BsLinkedin />
