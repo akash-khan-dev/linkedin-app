@@ -41,10 +41,21 @@ const Registration = () => {
         .then(() => {
           sendEmailVerification(auth.currentUser);
           setLoading(false);
-          navigate("/login");
+          toast.success(" Registration success Please Verified Your Email", {
+            position: "bottom-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setTimeout(() => {
+            navigate("/login");
+          }, 2500);
         })
         .catch(() => {
-          console.log();
           toast.error(`🦄 Email is use !`, {
             position: "bottom-center",
             autoClose: 2500,
@@ -61,18 +72,7 @@ const Registration = () => {
   return (
     <>
       <div className="registration">
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
+        <ToastContainer />
         <div className="registration-box">
           <div className="linkin-icon">
             <BsLinkedin />

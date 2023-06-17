@@ -9,6 +9,7 @@ import { BeatLoader } from "react-spinners";
 import { useFormik } from "formik";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { SignIn } from "../../Validation/Validation";
+import { ToastContainer, toast } from "react-toastify";
 
 export const Login = () => {
   const auth = getAuth();
@@ -31,8 +32,17 @@ export const Login = () => {
         formik.values.password
       )
         .then(({ user }) => {
-          console.log(user);
-          setLoading(false);
+          if (user.emailVerified === true) {
+          } else {
+            toast.error(` Email Not Verified !`, {
+              position: "bottom-center",
+              autoClose: 2500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: false,
+            });
+          }
         })
         .catch((error) => {
           console.log(error.message);
@@ -44,6 +54,7 @@ export const Login = () => {
   });
   return (
     <Container maxW="5xl">
+      <ToastContainer />
       <div className="login-box">
         <div className="login-item"></div>
         <Grid templateColumns="repeat(2, 1fr)" gap={8}>
