@@ -91,7 +91,7 @@ const Registration = () => {
                 placeholder="Full Name"
                 size="lg"
               />
-              <span className="login-error">
+              <span className="registration-error">
                 {formik.errors.fullname && formik.errors.fullname}
               </span>
               <Input
@@ -103,7 +103,7 @@ const Registration = () => {
                 placeholder="Email Address"
                 size="lg"
               />
-              <span className="login-error">
+              <span className="registration-error">
                 {formik.touched.email &&
                   formik.errors.email &&
                   formik.errors.email}
@@ -133,7 +133,7 @@ const Registration = () => {
                 </div>
               </div>
 
-              <span className="login-error">
+              <span className="registration-error">
                 {formik.touched.password &&
                   formik.errors.password &&
                   formik.errors.password}
@@ -148,7 +148,7 @@ const Registration = () => {
                 placeholder="Confirm Password"
                 size="lg"
               />
-              <span className="login-error">
+              <span className="registration-error">
                 {formik.touched.confirmpassword &&
                   formik.errors.confirmpassword &&
                   formik.errors.confirmpassword}

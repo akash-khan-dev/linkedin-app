@@ -14,3 +14,8 @@ const authValidation = {
 export const SignUp = Yup.object({
   ...authValidation,
 });
+
+export const SingIn = Yup.object({
+  email: authValidation.email,
+  password: authValidation.password,
+});
