@@ -43,5 +43,15 @@
   border-radius: 86px !important;
 }
 .registration-error {
-  color: #e97373;
+  color: var(--error-color);
+}
+.navigate-singin h1 {
+  text-align: center;
+  font-family: var(--nunito);
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 10px;
+}
+.navigate-singin a {
+  color: var(--error-color);
 }

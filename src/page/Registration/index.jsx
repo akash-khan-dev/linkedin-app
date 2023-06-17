@@ -16,7 +16,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Registration = () => {
   const auth = getAuth();
   const navigate = useNavigate();
@@ -176,6 +176,11 @@ const Registration = () => {
                 </Button>
               )}
             </form>
+            <div className="navigate-singin">
+              <h1>
+                Already have an account ? <Link to="/login">Sign In</Link>
+              </h1>
+            </div>
           </div>
         </div>
       </div>

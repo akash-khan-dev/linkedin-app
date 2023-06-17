@@ -12,9 +12,11 @@ import { SignIn } from "../../Validation/Validation";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { LoginUser } from "../../Feature/UserSlice/UserSlice";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const auth = getAuth();
   const [show, setShow] = React.useState(false);
   let [loading, setLoading] = useState(false);
@@ -38,6 +40,7 @@ export const Login = () => {
           if (user.emailVerified === true) {
             dispatch(LoginUser(user));
             localStorage.setItem("user", JSON.stringify(user));
+            navigate("/");
           } else {
             toast.error(` Email Not Verified !`, {
               position: "bottom-center",
@@ -147,6 +150,12 @@ export const Login = () => {
                     </Button>
                   )}
                 </form>
+                <div className="navigate-singup">
+                  <h1>
+                    Already have an account ?{" "}
+                    <Link to="/registration">Sign Up</Link>
+                  </h1>
+                </div>
               </div>
             </div>
           </div>
