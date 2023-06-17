@@ -15,10 +15,14 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 import { Link, useNavigate } from "react-router-dom";
+
 const Registration = () => {
   const auth = getAuth();
+  const db = getDatabase();
   const navigate = useNavigate();
   const [isShowPass, setIsShowPass] = useState(true);
   let [loading, setLoading] = useState(false);
@@ -28,6 +32,7 @@ const Registration = () => {
     password: "",
     confirmpassword: "",
   };
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: SignUp,
@@ -38,23 +43,37 @@ const Registration = () => {
         formik.values.email,
         formik.values.password
       )
-        .then(() => {
-          sendEmailVerification(auth.currentUser);
-          setLoading(false);
-          toast.success(" Registration success Please Verified Your Email", {
-            position: "bottom-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
+        .then(({ user }) => {
+          updateProfile(auth.currentUser, {
+            displayName: formik.values.fullname,
+          }).then(() => {
+            sendEmailVerification(auth.currentUser).then(() => {
+              set(ref(db, "users/"), {
+                username: user.displayName,
+                email: user.email,
+              }).then(() => {
+                toast.success(
+                  " Registration success Please Verified Your Email",
+                  {
+                    position: "bottom-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                  }
+                );
+                setLoading(false);
+                setTimeout(() => {
+                  navigate("/login");
+                }, 2500);
+              });
+            });
           });
-          setTimeout(() => {
-            navigate("/login");
-          }, 2500);
         })
+
         .catch(() => {
           toast.error(`🦄 Email is use !`, {
             position: "bottom-center",
@@ -68,7 +87,7 @@ const Registration = () => {
         });
     },
   });
-  console.log(formik.values);
+
   return (
     <>
       <div className="registration">

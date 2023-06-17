@@ -29,7 +29,6 @@ export const Login = () => {
     initialValues: initialValues,
     validationSchema: SignIn,
     onSubmit: () => {
-      console.log("hello");
       setLoading(true);
       signInWithEmailAndPassword(
         auth,
@@ -50,6 +49,7 @@ export const Login = () => {
               pauseOnHover: false,
               draggable: false,
             });
+            setLoading(false);
           }
         })
         .catch((error) => {
