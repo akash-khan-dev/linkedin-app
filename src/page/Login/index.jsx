@@ -7,9 +7,11 @@ import { Input } from "@chakra-ui/react";
 import { BsLinkedin } from "react-icons/bs";
 import { BeatLoader } from "react-spinners";
 import { useFormik } from "formik";
-import { SignUp } from "../../Validation/Validation";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { SignIn } from "../../Validation/Validation";
 
 export const Login = () => {
+  const auth = getAuth();
   const [show, setShow] = React.useState(false);
   let [loading, setLoading] = useState(false);
   const initialValues = {
@@ -19,10 +21,25 @@ export const Login = () => {
 
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema: SignUp,
+    validationSchema: SignIn,
     onSubmit: () => {
-      setLoading(true);
       console.log("hello");
+      setLoading(true);
+      signInWithEmailAndPassword(
+        auth,
+        formik.values.email,
+        formik.values.password
+      )
+        .then(({ user }) => {
+          console.log(user);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
     },
   });
   return (
@@ -47,10 +64,11 @@ export const Login = () => {
               <div className="registration-form">
                 <form onSubmit={formik.handleSubmit}>
                   <Input
+                    onChange={formik.handleChange}
                     mt="5"
                     type="email"
                     name="email"
-                    value=""
+                    value={formik.values.email}
                     placeholder="Email Address"
                     size="lg"
                   />
@@ -60,14 +78,16 @@ export const Login = () => {
                       formik.errors.email}
                   </span>
 
-                  {/* <div style={{ position: "relative" }}> */}
                   <InputGroup size="md">
                     <Input
+                      name="password"
+                      onChange={formik.handleChange}
                       mt="5"
                       pr="5.5rem"
                       type={show ? "text" : "password"}
                       placeholder="Enter password"
                       size="lg"
+                      value={formik.values.password}
                     />
                     <InputRightElement width="4.5rem">
                       <Button
@@ -92,7 +112,7 @@ export const Login = () => {
                   {!loading ? (
                     <Button
                       type="submit"
-                      className="reg-btn"
+                      className="login-btn"
                       mt="6"
                       width="full"
                       colorScheme="blue"
@@ -102,7 +122,7 @@ export const Login = () => {
                   ) : (
                     <Button
                       type="submit"
-                      className="reg-btn"
+                      className="login-btn"
                       mt="6"
                       width="full"
                       colorScheme="blue"
