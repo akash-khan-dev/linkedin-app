@@ -10,8 +10,11 @@ import { useFormik } from "formik";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { SignIn } from "../../Validation/Validation";
 import { ToastContainer, toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { LoginUser } from "../../Feature/UserSlice/UserSlice";
 
 export const Login = () => {
+  const dispatch = useDispatch();
   const auth = getAuth();
   const [show, setShow] = React.useState(false);
   let [loading, setLoading] = useState(false);
@@ -33,6 +36,8 @@ export const Login = () => {
       )
         .then(({ user }) => {
           if (user.emailVerified === true) {
+            dispatch(LoginUser(user));
+            localStorage.setItem("user", JSON.stringify(user));
           } else {
             toast.error(` Email Not Verified !`, {
               position: "bottom-center",
