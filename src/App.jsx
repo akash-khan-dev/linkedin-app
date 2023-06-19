@@ -9,13 +9,18 @@ import Registration from "./page/Registration";
 import NotLoginUser from "./PrivateRouter/NotLoginUser";
 import LoginUser from "./PrivateRouter/LoginUser";
 import { Home } from "./page/Home";
+import { About } from "./page/About/About";
+import RootLayOut from "./RootLayOut/RootLayOut";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
         <Route element={<LoginUser />}>
-          <Route path="/" element={<Home />}></Route>
+          <Route element={<RootLayOut />}>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/about" element={<About />}></Route>
+          </Route>
         </Route>
         <Route element={<NotLoginUser />}>
           <Route path="/registration" element={<Registration />}></Route>
@@ -27,6 +32,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router}></RouterProvider>
+      {/* <Home /> */}
     </>
   );
 }
