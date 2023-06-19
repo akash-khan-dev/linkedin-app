@@ -19,6 +19,7 @@ import {
 } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Registration = () => {
   const auth = getAuth();
@@ -26,13 +27,13 @@ const Registration = () => {
   const navigate = useNavigate();
   const [isShowPass, setIsShowPass] = useState(true);
   let [loading, setLoading] = useState(false);
+  const users = useSelector((user) => user.logins.login);
   const initialValues = {
     fullname: "",
     email: "",
     password: "",
     confirmpassword: "",
   };
-
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: SignUp,
@@ -48,7 +49,7 @@ const Registration = () => {
             displayName: formik.values.fullname,
           }).then(() => {
             sendEmailVerification(auth.currentUser).then(() => {
-              set(ref(db, "users/"), {
+              set(ref(db, "users/" + users.uid), {
                 username: user.displayName,
                 email: user.email,
               }).then(() => {
