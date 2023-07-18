@@ -3,4 +3,18 @@
   height: 100vh;
   background-color: var(--body-color);
   margin-top: 60px;
+  padding-top: 25px;
+}
+.home-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.my-account {
+  width: 20%;
+}
+.create-account {
+  width: 55%;
+}
+.all-page {
+  width: 20%;
 }
