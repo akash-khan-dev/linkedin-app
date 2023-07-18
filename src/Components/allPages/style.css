@@ -1,0 +1,21 @@
+.pages-container {
+  padding: 15px 10px;
+  background-color: var(--white-color);
+  border-radius: 7px;
+}
+.pages-heading h2 {
+  font-family: var(--white-color);
+  color: var(--black-color);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: normal;
+}
+.single-page {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.page-content button {
+  border-radius: 50px !important;
+}
