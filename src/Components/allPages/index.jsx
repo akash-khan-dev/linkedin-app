@@ -28,6 +28,38 @@ const Allpages = () => {
               </Box>
             </Flex>
           </div>
+          <div className="page-content">
+            <Flex>
+              <Avatar src={pageProfile} />
+              <Box ml="3">
+                <Text fontWeight="bold">Segun Adebayo</Text>
+                <Text fontSize="sm">UI Engineer</Text>
+                <Button
+                  rightIcon={<ArrowForwardIcon />}
+                  colorScheme="teal"
+                  variant="outline"
+                >
+                  Call us
+                </Button>
+              </Box>
+            </Flex>
+          </div>
+          <div className="page-content">
+            <Flex>
+              <Avatar src={pageProfile} />
+              <Box ml="3">
+                <Text fontWeight="bold">Segun Adebayo</Text>
+                <Text fontSize="sm">UI Engineer</Text>
+                <Button
+                  rightIcon={<ArrowForwardIcon />}
+                  colorScheme="teal"
+                  variant="outline"
+                >
+                  Call us
+                </Button>
+              </Box>
+            </Flex>
+          </div>
         </div>
       </div>
     </>

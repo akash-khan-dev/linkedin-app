@@ -11,11 +11,34 @@
   line-height: normal;
 }
 .single-page {
-  display: flex;
-  justify-content: space-between;
   margin-top: 10px;
+  height: 305px;
+  overflow-y: auto;
+}
+.single-page::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
 }
 
+/* Background color of the scrollbar track */
+.single-page::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Color of the scrollbar handle */
+.single-page::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Color of the scrollbar handle on hover */
+.single-page::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.page-content {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(215, 215, 215, 0.59);
+}
 .page-content button {
   border-radius: 50px !important;
 }
