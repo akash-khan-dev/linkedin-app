@@ -1,7 +1,14 @@
 import React from "react";
 import Logo from "../../assets/images/Logo.png";
 import "./style.css";
-import { Container } from "@chakra-ui/react";
+import {
+  Button,
+  Container,
+  Modal,
+  ModalBody,
+  ModalContent,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { FaNetworkWired } from "react-icons/fa";
@@ -10,9 +17,24 @@ import { AiFillNotification } from "react-icons/ai";
 import { FaSms } from "react-icons/fa";
 import { AiTwotoneHome } from "react-icons/Ai";
 import { useNavigate } from "react-router-dom";
-
+import profile from "../../assets/images/profile.jpg";
+import { FaAngleDown } from "react-icons/fa";
+import { getAuth, signOut } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { LoginUser } from "../../Feature/UserSlice/UserSlice";
 const Navbar = () => {
+  const auth = getAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleSignOut = () => {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      localStorage.removeItem("user");
+      dispatch(LoginUser(null));
+    });
+  };
   return (
     <div className="navbar-main">
       <Container maxW="6xl">
@@ -61,12 +83,51 @@ const Navbar = () => {
                 </div>
                 <div className="nav-list">Notification</div>
               </li>
-              <li>
-                <div className="usericon"></div>
-                <div className="nav-list">Me</div>
+              <li onClick={onOpen}>
+                <div className="usericon">
+                  <img src={profile} alt="profile" />
+                </div>
+                <div className="nav-list user">
+                  <span> Me</span>
+                  <FaAngleDown />
+                </div>
               </li>
             </ul>
           </div>
+        </div>
+        <div className="profile-modal">
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalContent>
+              <ModalBody>
+                <div className="profile-modal">
+                  <div className="user-profile">
+                    <div className="user-profile-img">
+                      <img src={profile} alt="profile" />
+                    </div>
+                  </div>
+                  <div className="user-profile-name">
+                    <h1>Akash khan</h1>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Eaque rerum iste doloribus provident. Repellendus, ratione
+                    </p>
+                  </div>
+                </div>
+                <div className="view-profile">
+                  <Button colorScheme="teal" variant="outline">
+                    View Profile
+                  </Button>
+                  <Button
+                    onClick={handleSignOut}
+                    colorScheme="teal"
+                    variant="outline"
+                  >
+                    Sign Out
+                  </Button>
+                </div>
+              </ModalBody>
+            </ModalContent>
+          </Modal>
         </div>
       </Container>
     </div>
