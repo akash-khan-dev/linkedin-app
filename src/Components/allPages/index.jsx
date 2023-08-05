@@ -23,7 +23,7 @@ const Allpages = () => {
                   colorScheme="teal"
                   variant="outline"
                 >
-                  Call us
+                  Follow
                 </Button>
               </Box>
             </Flex>
@@ -39,7 +39,7 @@ const Allpages = () => {
                   colorScheme="teal"
                   variant="outline"
                 >
-                  Call us
+                  Follow
                 </Button>
               </Box>
             </Flex>
@@ -55,7 +55,7 @@ const Allpages = () => {
                   colorScheme="teal"
                   variant="outline"
                 >
-                  Call us
+                  Follow
                 </Button>
               </Box>
             </Flex>

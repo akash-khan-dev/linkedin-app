@@ -18,6 +18,10 @@ const CreactePost = () => {
     onOpen();
   };
   const chooseFile = useRef();
+  // for img upload
+  const handleImgUpload = (e) => {
+    console.log(e.target.value);
+  };
   return (
     <>
       <div className="container">
@@ -58,7 +62,12 @@ const CreactePost = () => {
           </ModalBody>
 
           <ModalFooter>
-            <input type="file" hidden ref={chooseFile} />
+            <input
+              type="file"
+              onChange={handleImgUpload}
+              hidden
+              ref={chooseFile}
+            />
             <Button
               colorScheme="blue"
               mr={3}

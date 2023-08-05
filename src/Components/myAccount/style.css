@@ -23,7 +23,8 @@
   border-radius: 50%;
   position: absolute;
   top: 25px;
-  left: 34%;
+  left: 50%;
+  transform: translateX(-50%);
   overflow: hidden;
 }
 .profile-img img {

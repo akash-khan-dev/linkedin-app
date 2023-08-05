@@ -28,7 +28,7 @@
 .user-write-box input {
   background-color: transparent;
   border-radius: 50px;
-  width: 80%;
+  width: 95%;
 }
 .user-write-box input:hover {
   background-color: rgba(171, 171, 171, 0.307);
