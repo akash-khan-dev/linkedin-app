@@ -3,8 +3,13 @@ import "./style.css";
 
 import Cover from "../../assets/images/cover.jpg";
 import Profile from "../../assets/images/profile.jpg";
+import { useNavigate } from "react-router-dom";
 
 const MyAccount = () => {
+  const navigate = useNavigate();
+  const handleNavigateProfile = () => {
+    navigate("/profile");
+  };
   return (
     <>
       <div className="my-accout-wrapper">
@@ -12,7 +17,7 @@ const MyAccount = () => {
           <img src={Cover} alt="cover" />
         </div>
         <div className="navigate-profile">
-          <div className="profile-img">
+          <div onClick={handleNavigateProfile} className="profile-img">
             <img src={Profile} alt="profile" />
           </div>
           <div className="userName">
