@@ -1,13 +1,70 @@
-import React from "react";
+import React, { createRef, useState } from "react";
 import { Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/react";
 import { useRef } from "react";
 import { GrGallery } from "react-icons/gr";
 import ProfileUpload from "./ProfileUpload";
+import {
+  getStorage,
+  uploadString,
+  ref,
+  getDownloadURL,
+} from "firebase/storage";
+import { getAuth, updateProfile } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { LoginUser } from "../../Feature/UserSlice/UserSlice";
+
 const Popup = ({ isOpen, onClose }) => {
+  const storage = getStorage();
+  const auth = getAuth();
+  const dispatch = useDispatch();
+  const user = useSelector((user) => user.logins.login);
+  const storageRef = ref(storage, user.uid);
   const chooseFile = useRef();
+  const [image, setImage] = useState();
+  const [cropData, setCropData] = useState("#");
+  const cropperRef = createRef();
+
   const handleProfileChange = (e) => {
-    console.log(e.target.files);
+    e.preventDefault();
+    let files;
+    if (e.dataTransfer) {
+      files = e.dataTransfer.files;
+    } else if (e.target) {
+      files = e.target.files;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+    reader.readAsDataURL(files[0]);
   };
+  const getCropData = () => {
+    if (typeof cropperRef.current?.cropper !== "undefined") {
+      setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
+      // from firebase storage for upload URL
+      const message4 = cropperRef.current?.cropper
+        .getCroppedCanvas()
+        .toDataURL();
+      uploadString(storageRef, message4, "data_url").then(() => {
+        // from firebase storage for download URL
+        getDownloadURL(storageRef).then((downloadURL) => {
+          // from manage user firebase for profile upload
+          updateProfile(auth.currentUser, {
+            photoURL: downloadURL,
+          }).then(() => {
+            setImage(null);
+            onClose();
+            dispatch(LoginUser({ ...user, photoURL: downloadURL }));
+            localStorage.setItem(
+              "user",
+              JSON.stringify({ ...user, photoURL: downloadURL })
+            );
+          });
+        });
+      });
+    }
+  };
+
   return (
     <>
       <div>
@@ -33,7 +90,15 @@ const Popup = ({ isOpen, onClose }) => {
                     />
                   </div>
                 </div>
-                <ProfileUpload />
+                {image && (
+                  <ProfileUpload
+                    image={image}
+                    cropData={cropData}
+                    cropperRef={cropperRef}
+                    setImage={setImage}
+                    getCropData={getCropData}
+                  />
+                )}
               </div>
             </ModalBody>
           </ModalContent>

@@ -5,7 +5,8 @@ import "./index.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import firebaseConfig from "./Dbconnection/FirebaseConfig.js";
 import { Provider } from "react-redux";
-import { Store } from "./Feature/Store/Store.jsx";
+import { Store } from "./Feature/UserSlice/Store/Store.jsx";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider>

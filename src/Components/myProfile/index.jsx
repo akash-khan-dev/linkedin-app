@@ -18,7 +18,7 @@ const MyProfile = () => {
             <div className="cover-photo">
               <img src={cover} alt="cover" />
               <div onClick={onOpen} className="profile-photo">
-                <img src={profile} alt="profile" />
+                <img src={users.photoURL} alt="profile" />
               </div>
               <div className="cover-change-icon">
                 <GrEdit />
