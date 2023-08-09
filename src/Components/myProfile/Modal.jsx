@@ -20,6 +20,7 @@ const Popup = ({ isOpen, onClose }) => {
   const user = useSelector((user) => user.logins.login);
   const storageRef = ref(storage, user.uid);
   const chooseFile = useRef();
+  const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState();
   const [cropData, setCropData] = useState("#");
   const cropperRef = createRef();
@@ -40,6 +41,7 @@ const Popup = ({ isOpen, onClose }) => {
   };
   const getCropData = () => {
     if (typeof cropperRef.current?.cropper !== "undefined") {
+      setIsLoading(true);
       setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
       // from firebase storage for upload URL
       const message4 = cropperRef.current?.cropper
@@ -59,6 +61,7 @@ const Popup = ({ isOpen, onClose }) => {
               "user",
               JSON.stringify({ ...user, photoURL: downloadURL })
             );
+            setIsLoading(false);
           });
         });
       });
@@ -97,6 +100,7 @@ const Popup = ({ isOpen, onClose }) => {
                     cropperRef={cropperRef}
                     setImage={setImage}
                     getCropData={getCropData}
+                    isLoading={isLoading}
                   />
                 )}
               </div>

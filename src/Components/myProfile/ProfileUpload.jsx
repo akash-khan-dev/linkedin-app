@@ -3,8 +3,15 @@ import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import { RxCross2 } from "react-icons/rx";
 import { Button } from "@chakra-ui/react";
+import BeatLoader from "react-spinners/BeatLoader";
 
-const ProfileUpload = ({ image, cropperRef, setImage, getCropData }) => {
+const ProfileUpload = ({
+  image,
+  cropperRef,
+  setImage,
+  getCropData,
+  isLoading,
+}) => {
   const handleBackBtn = () => {
     setImage(null);
   };
@@ -40,9 +47,15 @@ const ProfileUpload = ({ image, cropperRef, setImage, getCropData }) => {
           guides={true}
         />
         <div className="upload-button">
-          <Button onClick={getCropData} colorScheme="teal" variant="outline">
-            Upload
-          </Button>
+          {isLoading ? (
+            <Button onClick={getCropData} colorScheme="teal" variant="outline">
+              <BeatLoader />
+            </Button>
+          ) : (
+            <Button onClick={getCropData} colorScheme="teal" variant="outline">
+              UPLOAD
+            </Button>
+          )}
         </div>
       </div>
     </>
