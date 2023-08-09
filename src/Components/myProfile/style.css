@@ -1,0 +1,108 @@
+.my-profile {
+  padding-top: 75px;
+  width: 100%;
+  height: 101vh;
+  background-color: var(--body-color);
+}
+.profile-wrapper {
+  width: 80%;
+  padding-bottom: 20px;
+  margin: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--white-color);
+}
+.cover-photo {
+  width: 100%;
+  height: 220px;
+  position: relative;
+}
+.cover-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.profile-photo {
+  cursor: pointer;
+  position: absolute;
+  top: 52%;
+  left: 3%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--white-color);
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cover-change-icon {
+  position: absolute;
+  top: 6%;
+  right: 2%;
+  width: 35px;
+  height: 35px;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile-name {
+  padding-left: 30px;
+  margin-top: 50px;
+}
+.profile-name h3 {
+  font-family: var(--nunito);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--black-color);
+}
+.profile-name p {
+  font-family: var(--nunito);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--gray);
+  max-width: 500px;
+}
+.connection h2 {
+  font-family: var(--nunito);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--primary-color);
+  max-width: 500px;
+}
+
+.profile-upload-popup {
+  padding: 100px 0px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.upload-box {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: var(--body-color);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.upload-box svg {
+  width: 20px;
+  height: 20px;
+}
+.upload-content {
+  margin-top: 5px;
+}
+.upload-content p {
+  font-family: var(--nunito);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black-color);
+}

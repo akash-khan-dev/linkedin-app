@@ -35,6 +35,10 @@ const Navbar = () => {
       dispatch(LoginUser(null));
     });
   };
+  const handleNavigateProfile = () => {
+    navigate("/profile");
+    onClose();
+  };
   return (
     <div className="navbar-main">
       <Container maxW="6xl">
@@ -114,7 +118,11 @@ const Navbar = () => {
                   </div>
                 </div>
                 <div className="view-profile">
-                  <Button colorScheme="teal" variant="outline">
+                  <Button
+                    onClick={handleNavigateProfile}
+                    colorScheme="teal"
+                    variant="outline"
+                  >
                     View Profile
                   </Button>
                   <Button

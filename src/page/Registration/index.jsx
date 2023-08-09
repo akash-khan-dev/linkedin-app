@@ -28,6 +28,7 @@ const Registration = () => {
   const [isShowPass, setIsShowPass] = useState(true);
   let [loading, setLoading] = useState(false);
   const users = useSelector((user) => user.logins.login);
+
   const initialValues = {
     fullname: "",
     email: "",
@@ -49,10 +50,11 @@ const Registration = () => {
             displayName: formik.values.fullname,
           }).then(() => {
             sendEmailVerification(auth.currentUser).then(() => {
-              set(ref(db, "users/" + users.uid), {
+              set(ref(db, "users/" + user.uid), {
                 username: user.displayName,
                 email: user.email,
               }).then(() => {
+                console.log("asci");
                 toast.success(
                   " Registration success Please Verified Your Email",
                   {
