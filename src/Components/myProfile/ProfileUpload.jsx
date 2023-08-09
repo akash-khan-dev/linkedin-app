@@ -1,6 +1,7 @@
 import React from "react";
-import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
+
+import Cropper from "react-cropper";
 import { RxCross2 } from "react-icons/rx";
 import { Button } from "@chakra-ui/react";
 import BeatLoader from "react-spinners/BeatLoader";
