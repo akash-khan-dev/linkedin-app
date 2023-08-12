@@ -19,12 +19,15 @@ import { useNavigate } from "react-router-dom";
 import profile from "../../assets/images/profile.jpg";
 import { FaAngleDown } from "react-icons/fa";
 import { getAuth, signOut } from "firebase/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LoginUser } from "../../Feature/UserSlice/UserSlice";
+import Avatar from "../../assets/images/man.jpg";
+
 const Navbar = () => {
   const auth = getAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const users = useSelector((user) => user.logins.login);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleSignOut = () => {
@@ -88,7 +91,13 @@ const Navbar = () => {
               </li>
               <li onClick={onOpen}>
                 <div className="usericon">
-                  <img src={profile} alt="profile" />
+                  <img
+                    src={users.photoURL || Avatar}
+                    onError={(e) => {
+                      e.target.src = { Avatar };
+                    }}
+                    alt="man"
+                  />
                 </div>
                 <div className="nav-list user">
                   <span> Me</span>
@@ -105,7 +114,13 @@ const Navbar = () => {
                 <div className="profile-modal">
                   <div className="user-profile">
                     <div className="user-profile-img">
-                      <img src={profile} alt="profile" />
+                      <img
+                        src={users.photoURL || Avatar}
+                        onError={(e) => {
+                          e.target.src = { Avatar };
+                        }}
+                        alt="man"
+                      />
                     </div>
                   </div>
                   <div className="user-profile-name">

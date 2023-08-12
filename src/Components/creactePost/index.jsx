@@ -11,8 +11,11 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import Avatar from "../../assets/images/man.jpg";
 
 const CreactePost = () => {
+  const users = useSelector((user) => user.logins.login);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleOpenModal = () => {
     onOpen();
@@ -28,7 +31,13 @@ const CreactePost = () => {
         <div className="create-post-wrapper">
           <div className="user-profile">
             <div className="user-img">
-              <img src={profile} alt="profile" />
+              <img
+                src={users.photoURL || Avatar}
+                onError={(e) => {
+                  e.target.src = { Avatar };
+                }}
+                alt="man"
+              />
             </div>
           </div>
           <div onClick={handleOpenModal} className="user-write-box">
@@ -45,7 +54,13 @@ const CreactePost = () => {
             <div className="modal-header">
               <div className="user-profile">
                 <div className="user-img">
-                  <img src={profile} alt="profile" />
+                  <img
+                    src={users.photoURL || Avatar}
+                    onError={(e) => {
+                      e.target.src = { Avatar };
+                    }}
+                    alt="man"
+                  />
                 </div>
               </div>
               <div className="modal-user-name">

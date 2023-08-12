@@ -4,9 +4,12 @@ import "./style.css";
 import Cover from "../../assets/images/cover.jpg";
 import Profile from "../../assets/images/profile.jpg";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Avatar from "../../assets/images/man.jpg";
 
 const MyAccount = () => {
   const navigate = useNavigate();
+  const users = useSelector((user) => user.logins.login);
   const handleNavigateProfile = () => {
     navigate("/profile");
   };
@@ -18,7 +21,13 @@ const MyAccount = () => {
         </div>
         <div className="navigate-profile">
           <div onClick={handleNavigateProfile} className="profile-img">
-            <img src={Profile} alt="profile" />
+            <img
+              src={users.photoURL || Avatar}
+              onError={(e) => {
+                e.target.src = { Avatar };
+              }}
+              alt="man"
+            />
           </div>
           <div className="userName">
             <h1>akash khan</h1>

@@ -2,10 +2,10 @@ import React from "react";
 import "./style.css";
 import { Container, useDisclosure } from "@chakra-ui/react";
 import cover from "../../assets/images/cover.jpg";
-import profile from "../../assets/images/profile.jpg";
 import { GrEdit } from "react-icons/gr";
 import { useSelector } from "react-redux";
 import Popup from "./Modal";
+import Avatar from "../../assets/images/man.jpg";
 
 const MyProfile = () => {
   const users = useSelector((user) => user.logins.login);
@@ -18,7 +18,13 @@ const MyProfile = () => {
             <div className="cover-photo">
               <img src={cover} alt="cover" />
               <div onClick={onOpen} className="profile-photo">
-                <img src={users.photoURL} alt="profile" />
+                <img
+                  src={users.photoURL || Avatar}
+                  onError={(e) => {
+                    e.target.src = { Avatar };
+                  }}
+                  alt="man"
+                />
               </div>
               <div className="cover-change-icon">
                 <GrEdit />
