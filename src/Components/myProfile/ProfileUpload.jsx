@@ -49,7 +49,12 @@ const ProfileUpload = ({
         />
         <div className="upload-button">
           {isLoading ? (
-            <Button onClick={getCropData} colorScheme="teal" variant="outline">
+            <Button
+              disabled
+              onClick={getCropData}
+              colorScheme="teal"
+              variant="outline"
+            >
               <BeatLoader />
             </Button>
           ) : (
